@@ -1,11 +1,12 @@
 const User = require("../../models/user");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const postRegister = async (req, res) => {
   try {
     const { username, password, mail } = req.body;
 
-    // Check if user already exists 
+    // Check if user already exists
     const userExists = await User.exists({ mail: mail.toLowerCase() });
 
     if (userExists) {
@@ -23,19 +24,27 @@ const postRegister = async (req, res) => {
       mail: mail.toLowerCase(),
       password: encryptedPassword,
     });
-    
+
     // Create JWT token and return that to the client (saved at the client side)
     // with this token, user will be able to access the protected routes
-    const token = "JWT TOKEN";
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        mail: user.mail,
+      },
+      process.env.TOKEN_KEY,
+      {
+        expiresIn: "24h",
+      }
+    );
 
-    res.status(201).json({ 
+    res.status(201).json({
       userDetails: {
         mail: user.mail,
         token,
-        username
+        username,
       },
-     });
-
+    });
   } catch (err) {
     return res.status(500).json({ error: err.message }).send("Server error");
   }
