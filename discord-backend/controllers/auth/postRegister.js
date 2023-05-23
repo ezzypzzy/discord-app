@@ -11,18 +11,18 @@ const postRegister = async (req, res) => {
     if (userExists) {
       // 409 Conflict response status code indicates a request conflict with current state of the server
       return res.status(409).json({ error: "E-mail already in use" });
-
-      // Encrypt the password
-      // 10 is the salt rounds value (default is 10)
-      const encryptedPassword = await bcrypt.hash(password, 10);
-
-      // Create user document and save it to the database
-      const user = await User.create({
-        username,
-        mail: mail.toLowerCase(),
-        password: encryptedPassword,
-      });
     }
+
+    // Encrypt the password
+    // 10 is the salt rounds value (default is 10)
+    const encryptedPassword = await bcrypt.hash(password, 10);
+
+    // Create user document and save it to the database
+    const user = await User.create({
+      username,
+      mail: mail.toLowerCase(),
+      password: encryptedPassword,
+    });
     
     // Create JWT token and return that to the client (saved at the client side)
     // with this token, user will be able to access the protected routes
