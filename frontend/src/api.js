@@ -16,8 +16,8 @@ apiClient.interceptors.request.use((config) => { // <-- config is the request ob
   }
 
   return config;
-}, (err) => {
-  return Promise.reject(err);
+}, (error) => {
+  return Promise.reject(error); // <-- this will return the error to the calling function
 });
 
 
