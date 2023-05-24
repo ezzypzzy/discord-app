@@ -14,6 +14,7 @@ import {
 import LoginPage from "./authPages/LoginPage/LoginPage";
 import RegisterPage from "./authPages/RegisterPage/RegisterPage";
 import Dashboard from "./Dashboard/Dashboard";
+import AlertNotification from "./shared/components/AlertNotification";
 
 import "./App.css";
 
@@ -48,6 +49,7 @@ function App() {
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
         </Routes>
       </Router>
+      <AlertNotification /> 
     </>
   );
 }
