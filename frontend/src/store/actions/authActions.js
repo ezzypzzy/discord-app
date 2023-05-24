@@ -1,4 +1,5 @@
 import * as api from "../../api";
+import { openAlertMessage } from "./alertActions";
 
 export const authActions = {
   // This is the redux action type that will be dispatched when the user details are set in the store.
@@ -32,6 +33,7 @@ const login = (userDetails, navigate) => async (dispatch) => {
 
   if (response.error) {
     // Show error message in alert
+    dispatch(openAlertMessage(response?.exception?.message));
   } else {
     // userDetails is the user object returned from the API (server) after successful login.
     // returns undefined if response.data is undefined else returns response.data.userDetails
@@ -50,6 +52,7 @@ const register = (userDetails, navigate) => async (dispatch) => {
 
   if (response.error) {
     // Show error message in alert
+    dispatch(openAlertMessage(response?.exception?.message));
   } else {
     // userDetails is the user object returned from the API (server) after successful login.
     // returns undefined if response.data is undefined else returns response.data.userDetails
