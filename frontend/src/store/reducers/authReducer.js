@@ -24,6 +24,8 @@ const reducer = (state = initState, action) => {
     case authActions.SET_USER_DETAILS:
       return {
         ...state,
+        // NEW STATE IS SET AS THE userDetails, THAT WILL BE ASSIGNED AS action.userDetails
+        // BECASUE action IS THE OBJECT PASSED AS ARGUMENT TO THE setUserDetails HELPER FUNCTION.
         userDetails: action.userDetails,
       };
       // The 'default' keyword specifies the code to run if there is no case match.
