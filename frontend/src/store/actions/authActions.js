@@ -16,6 +16,7 @@ export const getActions = (dispatch) => {
     // after successfully storing our JWT token in the redux store and our localStorage of browser.
     login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
     register: (userDetails, navigate) => dispatch(register(userDetails, navigate)),
+    setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
   };
 };
 
